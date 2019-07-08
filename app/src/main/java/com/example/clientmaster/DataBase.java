@@ -2,10 +2,60 @@ package com.example.clientmaster;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DataBase {
 
     private ArrayList<String> clientNames = new ArrayList<String>();
     private HashMap<String, Client> map = new HashMap<String, Client>();
+    private ArrayList<List<String>> dataList;
+
+    public DataBase() {
+
+
+    }
+
+    public void addNewClient(String[] clientData) {
+
+        String name = clientData[0];
+        String nit = clientData[1];
+        String securityNit = clientData[2];
+        String address = clientData[3];
+        String phone = clientData[4];
+        String city = clientData[5];
+        String department = clientData[6];
+        String contact = clientData[7];
+        String comment = "";
+        clientNames.add(name);
+        map.put(name, new Client(name, nit, securityNit, address, phone, city, department, contact, comment));
+
+    }
+
+    public void addNewClient(Client c) {
+
+        String name = c.getName();
+        clientNames.add(name);
+        map.put(name, c);
+
+    }
+
+    public ArrayList<String> getClientNames() {
+
+        return clientNames;
+
+    }
+
+    public String[] getClientData(String name) throws ClientNotFoundException {
+
+        Client c = map.get(name);
+        if (c != null) {
+
+            return c.getData();
+
+        } else {
+            throw new ClientNotFoundException();
+        }
+
+    }
 
 }

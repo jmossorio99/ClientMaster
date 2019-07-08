@@ -8,11 +8,36 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/logoImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/swikar_logo"/>
+
     <AutoCompleteTextView
         android:id="@+id/actv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre del cliente"
+        android:paddingTop="50dp"
         android:completionThreshold="1"/>
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:textStyle="bold"
+        style="?android:attr/borderlessButtonStyle"
+        android:onClick="searchClient"/>
+
+    <Button
+        android:id="@+id/addClientBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar cliente"
+        android:textStyle="bold"
+        android:onClick="addClientBtnClicked"/>
 
 </LinearLayout>

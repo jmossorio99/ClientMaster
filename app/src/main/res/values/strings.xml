@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Maestro Clientes</string>
+    <string name="app_name">Maestro Clientes Swikar</string>
+    <string name="clientName">Nombre del cliente</string>
+    <string name="clientNit">NIT</string>
+    <string name="clientSecurityNit">Codigo de seguridad NIT</string>
+    <string name="clientAddress">Dirección</string>
+    <string name="clientPhone">Teléfono</string>
+    <string name="clientCity">Ciudad</string>
+    <string name="ClientDepartment">Departamento</string>
+    <string name="clientContact">Contacto</string>
+    <string name="clientComment">Instrucción especial</string>
+    <string name="addClientBtn">Agregar</string>
+    <string name="cancelBtn">Cancelar</string>
 </resources>

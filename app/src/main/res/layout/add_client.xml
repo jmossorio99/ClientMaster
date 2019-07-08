@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Agregar un cliente"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/clientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientName"/>
+    <EditText
+        android:id="@+id/clientNit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientNit"/>
+    <EditText
+        android:id="@+id/clientSecurityNit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientSecurityNit"/>
+    <EditText
+        android:id="@+id/clientAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientAddress"/>
+    <EditText
+        android:id="@+id/clientPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientPhone"/>
+    <EditText
+        android:id="@+id/clientCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientCity"/>
+    <EditText
+        android:id="@+id/clientDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ClientDepartment"/>
+    <EditText
+        android:id="@+id/clientContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientContact"/>
+    <EditText
+        android:id="@+id/clientComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientComment"/>
+
+</LinearLayout>
