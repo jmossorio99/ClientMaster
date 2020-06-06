@@ -15,19 +15,16 @@ import android.widget.Toast;
 public class EditClientDialog extends DialogFragment {
 
     private final static String TAG = "EditClientDialog";
-    private AddClientDialogListener listener;
+    private EditClientDialogListener listener;
     private Client client;
-
-    public void setClient(Client client){
-        this.client = client;
-    }
 
     @Override
     public void onAttach(Context context) {
         Log.d(TAG, "onAttach: called");
         super.onAttach(context);
         try {
-            listener = (AddClientDialogListener) context;
+            listener = (EditClientDialogListener) context;
+            client = listener.getClient();
         } catch (ClassCastException e) {
             Log.e(TAG, "onAttach: exception caught -> " + e.getMessage());
         }
@@ -41,15 +38,6 @@ public class EditClientDialog extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.client_form, null);
         builder.setView(view);
-        ((EditText) view.findViewById(R.id.clientName)).setText(client.getName());
-        ((EditText) view.findViewById(R.id.clientNit)).setText(client.getNit());
-        ((EditText) view.findViewById(R.id.clientSecurityNit)).setText(client.getSecurityNit());
-        ((EditText) view.findViewById(R.id.clientAddress)).setText(client.getAddress());
-        ((EditText) view.findViewById(R.id.clientPhone)).setText(client.getPhone());
-        ((EditText) view.findViewById(R.id.clientCity)).setText(client.getCity());
-        ((EditText) view.findViewById(R.id.clientDepartment)).setText(client.getDepartment());
-        ((EditText) view.findViewById(R.id.clientContact)).setText(client.getContact());
-        ((EditText) view.findViewById(R.id.clientComment)).setText(client.getComment());
         builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -63,7 +51,7 @@ public class EditClientDialog extends DialogFragment {
                 String contact = ((EditText) view.findViewById(R.id.clientContact)).getText().toString();
                 String comment = ((EditText) view.findViewById(R.id.clientComment)).getText().toString();
                 Client c = new Client(name, nit, securityNit, address, phone, city, department, contact, comment);
-                listener.onAddClientDialogPositiveClick(EditClientDialog.this, c);
+                listener.onEditClientDialogPositiveClick(EditClientDialog.this, c);
                 Toast.makeText(getContext(), "Cliente Agregado", Toast.LENGTH_SHORT).show();
             }
         });
@@ -73,7 +61,16 @@ public class EditClientDialog extends DialogFragment {
                 Toast.makeText(getContext(), "Operación cancelada", Toast.LENGTH_SHORT).show();
             }
         });
+        ((EditText) view.findViewById(R.id.clientName)).setText(client.getName());
+        ((EditText) view.findViewById(R.id.clientNit)).setText(client.getNit());
+        ((EditText) view.findViewById(R.id.clientSecurityNit)).setText(client.getSecurityNit());
+        ((EditText) view.findViewById(R.id.clientAddress)).setText(client.getAddress());
+        ((EditText) view.findViewById(R.id.clientPhone)).setText(client.getPhone());
+        ((EditText) view.findViewById(R.id.clientCity)).setText(client.getCity());
+        ((EditText) view.findViewById(R.id.clientDepartment)).setText(client.getDepartment());
+        ((EditText) view.findViewById(R.id.clientContact)).setText(client.getContact());
+        ((EditText) view.findViewById(R.id.clientComment)).setText(client.getComment());
         Log.d(TAG,"onCreateDialog: finished");
-        return super.onCreateDialog(savedInstanceState);
+        return builder.create();
     }
 }

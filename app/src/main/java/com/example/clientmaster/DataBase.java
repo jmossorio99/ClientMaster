@@ -35,22 +35,14 @@ public class DataBase implements Serializable {
 
     }
 
+    public void deleteClient(String name){
+        clientNames.remove(name);
+        map.remove(name);
+    }
+
     public ArrayList<String> getClientNames() {
 
         return clientNames;
-
-    }
-
-    public String[] getClientData(String name) throws ClientNotFoundException {
-
-        Client c = map.get(name);
-        if (c != null) {
-
-            return c.getData();
-
-        } else {
-            throw new ClientNotFoundException();
-        }
 
     }
 

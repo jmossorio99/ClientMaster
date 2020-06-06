@@ -21,4 +21,6 @@
     <string name="clientFormDepartment">Departamento</string>
     <string name="clientFormContact">Contacto</string>
     <string name="clientFormComment">Instrucción especial</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
