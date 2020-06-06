@@ -1,6 +1,8 @@
 package com.example.clientmaster;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
 
     private String name;
     private String nit;
@@ -106,4 +108,8 @@ public class Client {
 
     }
 
+    @Override
+    public String toString() {
+        return name + ";" + nit + ";" + securityNit + ";" + address + ";" + phone + ";" + city + ";" + department + ";" + contact + ";" + comment;
+    }
 }

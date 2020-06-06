@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/clientFormTitle"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/clientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormName"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <EditText
+        android:id="@+id/clientNit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormNit"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientName"
+        app:layout_constraintTop_toBottomOf="@+id/clientName" />
+
+    <EditText
+        android:id="@+id/clientSecurityNit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormSecutiryNit"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientNit"
+        app:layout_constraintTop_toBottomOf="@+id/clientNit" />
+
+    <EditText
+        android:id="@+id/clientAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormAddr"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientSecurityNit"
+        app:layout_constraintTop_toBottomOf="@+id/clientSecurityNit" />
+
+    <EditText
+        android:id="@+id/clientPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormPhone"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientAddress"
+        app:layout_constraintTop_toBottomOf="@+id/clientAddress" />
+
+    <EditText
+        android:id="@+id/clientCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormCity"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientPhone"
+        app:layout_constraintTop_toBottomOf="@+id/clientPhone" />
+
+    <EditText
+        android:id="@+id/clientDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormDepartment"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientCity"
+        app:layout_constraintTop_toBottomOf="@+id/clientCity" />
+
+    <EditText
+        android:id="@+id/clientContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormContact"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientDepartment"
+        app:layout_constraintTop_toBottomOf="@+id/clientDepartment" />
+
+    <EditText
+        android:id="@+id/clientComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/clientFormComment"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/clientContact"
+        app:layout_constraintTop_toBottomOf="@+id/clientContact" />
+</android.support.constraint.ConstraintLayout>

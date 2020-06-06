@@ -1,19 +1,15 @@
 package com.example.clientmaster;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DataBase {
+public class DataBase implements Serializable {
 
     private ArrayList<String> clientNames = new ArrayList<String>();
     private HashMap<String, Client> map = new HashMap<String, Client>();
     private ArrayList<List<String>> dataList;
-
-    public DataBase() {
-
-
-    }
 
     public void addNewClient(String[] clientData) {
 
@@ -56,6 +52,11 @@ public class DataBase {
             throw new ClientNotFoundException();
         }
 
+    }
+
+    public Client getClient(String clientName) throws ClientNotFoundException{
+        if (map.get(clientName) != null) return map.get(clientName);
+        else throw new ClientNotFoundException();
     }
 
 }

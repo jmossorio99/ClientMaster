@@ -15,18 +15,27 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddClientDialog.AddClientDialogListener {
+public class MainActivity extends AppCompatActivity implements AddClientDialogListener {
 
+    final static private String TAG = "MainActivity";
     private String currentClient = "";
     private DataBase db;
     private AutoCompleteTextView editText;
@@ -34,18 +43,19 @@ public class MainActivity extends AppCompatActivity implements AddClientDialog.A
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = new DataBase();
-        String line = "";
+        db = loadStore();
+        String line1 = "";
         try {
             ArrayList<List<String>> dataList = new ArrayList<>();
             InputStream is = getResources().openRawResource(R.raw.dataa);
             BufferedReader buff = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
-            while ((line = buff.readLine()) != null) {
+            while ((line1 = buff.readLine()) != null) {
 
-                String[] data = line.split(",");
+                String[] data = line1.split(",");
                 if (data.length > 0) {
                     db.addNewClient(data);
                 } else {
@@ -55,30 +65,33 @@ public class MainActivity extends AppCompatActivity implements AddClientDialog.A
             }
 
         } catch (IOException e) {
-            Log.wtf("MainActivity", "Error reading in line " + line, e);
+            Log.wtf(TAG, "Error reading in line " + line1, e);
             e.printStackTrace();
         }
         editText = findViewById(R.id.actv);
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, db.getClientNames());
         editText.setAdapter(adapter);
+        Log.d(TAG, "onCreate: finished");
 
     }
 
     public void searchClient(View view) {
 
+        Log.d(TAG, "searchClient: called");
+
         currentClient = editText.getText().toString();
         try {
-            String[] clientData = db.getClientData(currentClient);
+            Client client = db.getClient(currentClient);
             ClientInfoDialog dialog = new ClientInfoDialog();
-            dialog.setText("Nombre: " + clientData[0] + "\n"
-                    + "Nit: " + clientData[1] + " " + clientData[2] + "\n"
-                    + "Dirección: " + clientData[3] + "\n"
-                    + "Teléfono: " + clientData[4] + "\n"
-                    + "Ciudad: " + clientData[5] + "\n"
-                    + "Departamento: " + clientData[6] + "\n"
-                    + "Contacto: " + clientData[7] + "\n"
-                    + "Instrucción especial: " + clientData[8]);
+            dialog.setText("Nombre: " + client.getName() + "\n"
+                    + "Nit: " + client.getNit() + " " + client.getSecurityNit() + "\n"
+                    + "Dirección: " + client.getAddress() + "\n"
+                    + "Teléfono: " + client.getPhone() + "\n"
+                    + "Ciudad: " + client.getCity() + "\n"
+                    + "Departamento: " + client.getDepartment() + "\n"
+                    + "Contacto: " + client.getContact() + "\n"
+                    + "Instrucción especial: " + client.getComment());
             dialog.show(getSupportFragmentManager(), "infoCliente");
         } catch (ClientNotFoundException e) {
             Context context = getApplicationContext();
@@ -86,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AddClientDialog.A
             int duration = Toast.LENGTH_SHORT;
             Toast.makeText(context, text, duration).show();
         }
-
+        Log.d(TAG, "searchClient: finished");
 
     }
 
@@ -94,28 +107,57 @@ public class MainActivity extends AppCompatActivity implements AddClientDialog.A
 
         DialogFragment dialog = new AddClientDialog();
         dialog.show(getSupportFragmentManager(), "AddClientDialogFragment");
-
-    }
-
-    public void addClient() {
-
-
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, Client c) {
+    public void onAddClientDialogPositiveClick(DialogFragment dialog, Client c) {
 
         db.addNewClient(c);
-        adapter = new ArrayAdapter<String>(this,
+        adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, db.getClientNames());
         editText.setAdapter(adapter);
-        InputStream is = getResources().openRawResource(R.raw.dataa);
-        try {
-            byte[] buffer = new byte[is.available()];
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveStore();
+        Log.d(TAG, "onAddClientDialogPositiveClick: client Added");
+    }
+
+    @Override
+    public void onEditClientDialogPositiveClick(DialogFragment dialog, Client c) {
 
     }
 
+    private void saveStore(){
+        try{
+            FileOutputStream fos = getApplicationContext().openFileOutput("store.data", Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(db);
+            oos.close();
+            fos.close();
+            Log.d(TAG, "saveStore: saved db file");
+        } catch (IOException e) {
+            Log.e(TAG, "saveStore: error saving db");
+        }
+    }
+
+    private DataBase loadStore(){
+        Log.d(TAG, "loadStore: called");
+        try {
+
+            FileInputStream fis = getApplicationContext().openFileInput("store.data");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            DataBase db = (DataBase) ois.readObject();
+            ois.close();
+            fis.close();
+            return db;
+        } catch (Exception e) {
+            Log.e(TAG, "loadStore: error loading, maybe no previous db created");
+            DataBase db = new DataBase();
+            return db;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy: called");
+        super.onDestroy();
+    }
 }

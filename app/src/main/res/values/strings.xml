@@ -11,4 +11,14 @@
     <string name="clientComment">Instrucción especial</string>
     <string name="addClientBtn">Agregar</string>
     <string name="cancelBtn">Cancelar</string>
+    <string name="clientFormTitle">Agregar un cliente</string>
+    <string name="clientFormName">Nombre del cliente</string>
+    <string name="clientFormNit">NIT</string>
+    <string name="clientFormSecutiryNit">Código de seguridad NIT</string>
+    <string name="clientFormAddr">Dirección</string>
+    <string name="clientFormPhone">Teléfono</string>
+    <string name="clientFormCity">Ciudad</string>
+    <string name="clientFormDepartment">Departamento</string>
+    <string name="clientFormContact">Contacto</string>
+    <string name="clientFormComment">Instrucción especial</string>
 </resources>
